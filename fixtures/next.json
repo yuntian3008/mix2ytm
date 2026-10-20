@@ -1,0 +1,513 @@
+{
+ "contents": {
+  "twoColumnWatchNextResults": {
+   "playlist": {
+    "playlist": {
+     "title": "Mix - Maroon 5 - Animals (Lyrics)",
+     "contents": [
+      {
+       "playlistPanelVideoRenderer": {
+        "videoId": "0GVExpdmoDs",
+        "title": {
+         "accessibility": {
+          "accessibilityData": {
+           "label": "Maroon 5 - Animals (Lyrics) 3 minutes, 50 seconds"
+          }
+         },
+         "simpleText": "Maroon 5 - Animals (Lyrics)"
+        },
+        "navigationEndpoint": {
+         "watchEndpoint": {
+          "videoId": "0GVExpdmoDs",
+          "index": 0,
+          "params": "OAE%3D"
+         }
+        }
+       }
+      },
+      {
+       "playlistPanelVideoRenderer": {
+        "videoId": "fwK7ggA3-bU",
+        "title": {
+         "accessibility": {
+          "accessibilityData": {
+           "label": "Maroon 5 - One More Night (Official Music Video) 3 minutes, 43 seconds"
+          }
+         },
+         "simpleText": "Maroon 5 - One More Night (Official Music Video)"
+        },
+        "navigationEndpoint": {
+         "watchEndpoint": {
+          "videoId": "fwK7ggA3-bU",
+          "index": 1,
+          "params": "OAE%3D"
+         }
+        }
+       }
+      },
+      {
+       "playlistPanelVideoRenderer": {
+        "videoId": "T3E9Wjbq44E",
+        "title": {
+         "accessibility": {
+          "accessibilityData": {
+           "label": "Gym Class Heroes: Stereo Hearts ft. Adam Levine [OFFICIAL VIDEO] 3 minutes, 37 seconds"
+          }
+         },
+         "simpleText": "Gym Class Heroes: Stereo Hearts ft. Adam Levine [OFFICIAL VIDEO]"
+        },
+        "navigationEndpoint": {
+         "watchEndpoint": {
+          "videoId": "T3E9Wjbq44E",
+          "index": 2,
+          "params": "OAE%3D"
+         }
+        }
+       }
+      },
+      {
+       "playlistPanelVideoRenderer": {
+        "videoId": "3Kxf2dHlDpQ",
+        "title": {
+         "accessibility": {
+          "accessibilityData": {
+           "label": "The Script - Hall Of Fame (Lyrics) 3 minutes, 23 seconds"
+          }
+         },
+         "simpleText": "The Script - Hall Of Fame (Lyrics)"
+        },
+        "navigationEndpoint": {
+         "watchEndpoint": {
+          "videoId": "3Kxf2dHlDpQ",
+          "index": 3,
+          "params": "OAE%3D"
+         }
+        }
+       }
+      },
+      {
+       "playlistPanelVideoRenderer": {
+        "videoId": "mgT0N3tMP74",
+        "title": {
+         "accessibility": {
+          "accessibilityData": {
+           "label": "OneRepublic - Counting Stars (Lyrics) 4 minutes, 18 seconds"
+          }
+         },
+         "simpleText": "OneRepublic - Counting Stars (Lyrics)"
+        },
+        "navigationEndpoint": {
+         "watchEndpoint": {
+          "videoId": "mgT0N3tMP74",
+          "index": 4,
+          "params": "OAE%3D"
+         }
+        }
+       }
+      },
+      {
+       "playlistPanelVideoRenderer": {
+        "videoId": "7wtfhZwyrcc",
+        "title": {
+         "accessibility": {
+          "accessibilityData": {
+           "label": "Imagine Dragons - Believer (Official Music Video) 3 minutes, 37 seconds"
+          }
+         },
+         "simpleText": "Imagine Dragons - Believer (Official Music Video)"
+        },
+        "navigationEndpoint": {
+         "watchEndpoint": {
+          "videoId": "7wtfhZwyrcc",
+          "index": 5,
+          "params": "OAE%3D"
+         }
+        }
+       }
+      },
+      {
+       "playlistPanelVideoRenderer": {
+        "videoId": "2VDdP7lYiiI",
+        "title": {
+         "accessibility": {
+          "accessibilityData": {
+           "label": "Clean Bandit - Rockabye (Lyrics) feat. Sean Paul & Anne-Marie 4 minutes, 10 seconds"
+          }
+         },
+         "simpleText": "Clean Bandit - Rockabye (Lyrics) feat. Sean Paul & Anne-Marie"
+        },
+        "navigationEndpoint": {
+         "watchEndpoint": {
+          "videoId": "2VDdP7lYiiI",
+          "index": 6,
+          "params": "OAE%3D"
+         }
+        }
+       }
+      },
+      {
+       "playlistPanelVideoRenderer": {
+        "videoId": "liTfD88dbCo",
+        "title": {
+         "accessibility": {
+          "accessibilityData": {
+           "label": "Ed Sheeran - Shape of You (Lyrics) 3 minutes, 52 seconds"
+          }
+         },
+         "simpleText": "Ed Sheeran - Shape of You (Lyrics)"
+        },
+        "navigationEndpoint": {
+         "watchEndpoint": {
+          "videoId": "liTfD88dbCo",
+          "index": 7,
+          "params": "OAE%3D"
+         }
+        }
+       }
+      },
+      {
+       "playlistPanelVideoRenderer": {
+        "videoId": "xizN47Box_Y",
+        "title": {
+         "accessibility": {
+          "accessibilityData": {
+           "label": "The Weeknd - Starboy (Lyrics) ft. Daft Punk 3 minutes, 48 seconds"
+          }
+         },
+         "simpleText": "The Weeknd - Starboy (Lyrics) ft. Daft Punk"
+        },
+        "navigationEndpoint": {
+         "watchEndpoint": {
+          "videoId": "xizN47Box_Y",
+          "index": 8,
+          "params": "OAE%3D"
+         }
+        }
+       }
+      },
+      {
+       "playlistPanelVideoRenderer": {
+        "videoId": "0-p5EbAsxUM",
+        "title": {
+         "accessibility": {
+          "accessibilityData": {
+           "label": "Rihanna - Diamonds 3 minutes, 46 seconds"
+          }
+         },
+         "simpleText": "Rihanna - Diamonds"
+        },
+        "navigationEndpoint": {
+         "watchEndpoint": {
+          "videoId": "0-p5EbAsxUM",
+          "index": 9,
+          "params": "OAE%3D"
+         }
+        }
+       }
+      },
+      {
+       "playlistPanelVideoRenderer": {
+        "videoId": "mWUamzMQFvI",
+        "title": {
+         "accessibility": {
+          "accessibilityData": {
+           "label": "Eminem - The Monster (Lyrics) ft. Rihanna 4 minutes, 43 seconds"
+          }
+         },
+         "simpleText": "Eminem - The Monster (Lyrics) ft. Rihanna"
+        },
+        "navigationEndpoint": {
+         "watchEndpoint": {
+          "videoId": "mWUamzMQFvI",
+          "index": 10,
+          "params": "OAE%3D"
+         }
+        }
+       }
+      },
+      {
+       "playlistPanelVideoRenderer": {
+        "videoId": "RgKAFK5djSk",
+        "title": {
+         "accessibility": {
+          "accessibilityData": {
+           "label": "Wiz Khalifa - See You Again ft. Charlie Puth [Official Video] Furious 7 Soundtrack 3 minutes, 58 seconds"
+          }
+         },
+         "simpleText": "Wiz Khalifa - See You Again ft. Charlie Puth [Official Video] Furious 7 Soundtrack"
+        },
+        "navigationEndpoint": {
+         "watchEndpoint": {
+          "videoId": "RgKAFK5djSk",
+          "index": 11,
+          "params": "OAE%3D"
+         }
+        }
+       }
+      },
+      {
+       "playlistPanelVideoRenderer": {
+        "videoId": "6QYcd7RggNU",
+        "title": {
+         "accessibility": {
+          "accessibilityData": {
+           "label": "Charlie Puth - Attention (Lyrics) 3 minutes, 33 seconds"
+          }
+         },
+         "simpleText": "Charlie Puth - Attention (Lyrics)"
+        },
+        "navigationEndpoint": {
+         "watchEndpoint": {
+          "videoId": "6QYcd7RggNU",
+          "index": 12,
+          "params": "OAE%3D"
+         }
+        }
+       }
+      },
+      {
+       "playlistPanelVideoRenderer": {
+        "videoId": "SMs0GnYze34",
+        "title": {
+         "accessibility": {
+          "accessibilityData": {
+           "label": "DJ Snake ft. Justin Bieber - Let Me Love You [Official Lyric Video] 3 minutes, 27 seconds"
+          }
+         },
+         "simpleText": "DJ Snake ft. Justin Bieber - Let Me Love You [Official Lyric Video]"
+        },
+        "navigationEndpoint": {
+         "watchEndpoint": {
+          "videoId": "SMs0GnYze34",
+          "index": 13,
+          "params": "OAE%3D"
+         }
+        }
+       }
+      },
+      {
+       "playlistPanelVideoRenderer": {
+        "videoId": "PT2_F-1esPk",
+        "title": {
+         "accessibility": {
+          "accessibilityData": {
+           "label": "The Chainsmokers - Closer (Lyric) ft. Halsey 4 minutes, 22 seconds"
+          }
+         },
+         "simpleText": "The Chainsmokers - Closer (Lyric) ft. Halsey"
+        },
+        "navigationEndpoint": {
+         "watchEndpoint": {
+          "videoId": "PT2_F-1esPk",
+          "index": 14,
+          "params": "OAE%3D"
+         }
+        }
+       }
+      },
+      {
+       "playlistPanelVideoRenderer": {
+        "videoId": "PIcHKcGxCzU",
+        "title": {
+         "accessibility": {
+          "accessibilityData": {
+           "label": "Camila Cabello - Havana (Lyrics) ft. Young Thug 3 minutes, 37 seconds"
+          }
+         },
+         "simpleText": "Camila Cabello - Havana (Lyrics) ft. Young Thug"
+        },
+        "navigationEndpoint": {
+         "watchEndpoint": {
+          "videoId": "PIcHKcGxCzU",
+          "index": 15,
+          "params": "OAE%3D"
+         }
+        }
+       }
+      },
+      {
+       "playlistPanelVideoRenderer": {
+        "videoId": "mY9fNwGE7YA",
+        "title": {
+         "accessibility": {
+          "accessibilityData": {
+           "label": "Sia - Cheap Thrills (Lyrics) ft. Sean Paul 3 minutes, 43 seconds"
+          }
+         },
+         "simpleText": "Sia - Cheap Thrills (Lyrics) ft. Sean Paul"
+        },
+        "navigationEndpoint": {
+         "watchEndpoint": {
+          "videoId": "mY9fNwGE7YA",
+          "index": 16,
+          "params": "OAE%3D"
+         }
+        }
+       }
+      },
+      {
+       "playlistPanelVideoRenderer": {
+        "videoId": "PvKw4ljBohA",
+        "title": {
+         "accessibility": {
+          "accessibilityData": {
+           "label": "Britney Spears - Criminal (Lyrics) 3 minutes, 44 seconds"
+          }
+         },
+         "simpleText": "Britney Spears - Criminal (Lyrics)"
+        },
+        "navigationEndpoint": {
+         "watchEndpoint": {
+          "videoId": "PvKw4ljBohA",
+          "index": 17,
+          "params": "OAE%3D"
+         }
+        }
+       }
+      },
+      {
+       "playlistPanelVideoRenderer": {
+        "videoId": "jk01lN8d0xY",
+        "title": {
+         "accessibility": {
+          "accessibilityData": {
+           "label": "Maroon 5 - Moves Like Jagger (Lyrics) ft. Christina Aguilera 4 minutes, 6 seconds"
+          }
+         },
+         "simpleText": "Maroon 5 - Moves Like Jagger (Lyrics) ft. Christina Aguilera"
+        },
+        "navigationEndpoint": {
+         "watchEndpoint": {
+          "videoId": "jk01lN8d0xY",
+          "index": 18,
+          "params": "OAE%3D"
+         }
+        }
+       }
+      },
+      {
+       "playlistPanelVideoRenderer": {
+        "videoId": "J9abt3xpdDU",
+        "title": {
+         "accessibility": {
+          "accessibilityData": {
+           "label": "Justin Bieber, Nicki Minaj – Beauty And A Beat (Lyrics) 3 minutes, 49 seconds"
+          }
+         },
+         "simpleText": "Justin Bieber, Nicki Minaj – Beauty And A Beat (Lyrics)"
+        },
+        "navigationEndpoint": {
+         "watchEndpoint": {
+          "videoId": "J9abt3xpdDU",
+          "index": 19,
+          "params": "OAE%3D"
+         }
+        }
+       }
+      },
+      {
+       "playlistPanelVideoRenderer": {
+        "videoId": "zh8zAmeWG10",
+        "title": {
+         "accessibility": {
+          "accessibilityData": {
+           "label": "We Found Love x I Gotta Feeling (Mashup) / Full Version! 4 minutes, 56 seconds"
+          }
+         },
+         "simpleText": "We Found Love x I Gotta Feeling (Mashup) / Full Version!"
+        },
+        "navigationEndpoint": {
+         "watchEndpoint": {
+          "videoId": "zh8zAmeWG10",
+          "index": 20,
+          "params": "OAE%3D"
+         }
+        }
+       }
+      },
+      {
+       "playlistPanelVideoRenderer": {
+        "videoId": "bfl76Sr-Rsk",
+        "title": {
+         "accessibility": {
+          "accessibilityData": {
+           "label": "Stereo Love (Remastered Version) 5 minutes, 22 seconds"
+          }
+         },
+         "simpleText": "Stereo Love (Remastered Version)"
+        },
+        "navigationEndpoint": {
+         "watchEndpoint": {
+          "videoId": "bfl76Sr-Rsk",
+          "index": 21,
+          "params": "OAE%3D"
+         }
+        }
+       }
+      },
+      {
+       "playlistPanelVideoRenderer": {
+        "videoId": "wnLJjdmx-R4",
+        "title": {
+         "accessibility": {
+          "accessibilityData": {
+           "label": "Jennifer Lopez - On The Floor (Lyrics) ft. Pitbull 5 minutes, 36 seconds"
+          }
+         },
+         "simpleText": "Jennifer Lopez - On The Floor (Lyrics) ft. Pitbull"
+        },
+        "navigationEndpoint": {
+         "watchEndpoint": {
+          "videoId": "wnLJjdmx-R4",
+          "index": 22,
+          "params": "OAE%3D"
+         }
+        }
+       }
+      },
+      {
+       "playlistPanelVideoRenderer": {
+        "videoId": "0KSOMA3QBU0",
+        "title": {
+         "accessibility": {
+          "accessibilityData": {
+           "label": "Katy Perry - Dark Horse ft. Juicy J 3 minutes, 45 seconds"
+          }
+         },
+         "simpleText": "Katy Perry - Dark Horse ft. Juicy J"
+        },
+        "navigationEndpoint": {
+         "watchEndpoint": {
+          "videoId": "0KSOMA3QBU0",
+          "index": 23,
+          "params": "OAE%3D"
+         }
+        }
+       }
+      },
+      {
+       "playlistPanelVideoRenderer": {
+        "videoId": "uWoYIOcOpwU",
+        "title": {
+         "accessibility": {
+          "accessibilityData": {
+           "label": "Ellie Goulding - Love Me Like You Do (Lyrics) 4 minutes"
+          }
+         },
+         "simpleText": "Ellie Goulding - Love Me Like You Do (Lyrics)"
+        },
+        "navigationEndpoint": {
+         "watchEndpoint": {
+          "videoId": "uWoYIOcOpwU",
+          "index": 24,
+          "params": "OAE%3D"
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  }
+ }
+}
