@@ -35,3 +35,37 @@ export async function sapisidHash(sapisid: string, ts: number, origin: string): 
   const hex = [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, '0')).join('')
   return `SAPISIDHASH ${ts}_${hex}`
 }
+
+const MAX_CALLS = 100
+const MAX_TRACKS = 1000
+
+// Same paging as yt-dlp's _extract_inline_playlist: ask for the window after the last item seen,
+// stop when a window ends on that item (the Mix is over).
+export async function readMix(
+  callNext: (body: { videoId: string; index?: number; params?: string }) => Promise<unknown>,
+  start: { videoId: string },
+  onProgress?: (count: number) => void,
+): Promise<{ title: string; tracks: Track[] }> {
+  let page = panelItems(await callNext({ videoId: start.videoId }))
+  const title = page.title
+  const collected: PanelItem[] = []
+  let lastId: string | null = null
+  for (let calls = 1; ; calls++) {
+    const from = page.items.findIndex((v) => v.id === lastId) + 1
+    if (from >= page.items.length) break
+    collected.push(...page.items.slice(from))
+    onProgress?.(collected.length)
+    if (calls >= MAX_CALLS || collected.length >= MAX_TRACKS) break
+    const last = page.items[page.items.length - 1]
+    lastId = last.id
+    page = panelItems(await callNext({ videoId: last.id, index: last.index, params: last.params }))
+  }
+  const seen = new Set<string>()
+  const tracks: Track[] = []
+  for (const { id, title } of collected) {
+    if (seen.has(id) || title === '[Private video]' || title === '[Deleted video]') continue
+    seen.add(id)
+    tracks.push({ id, title })
+  }
+  return { title, tracks: tracks.slice(0, MAX_TRACKS) }
+}
