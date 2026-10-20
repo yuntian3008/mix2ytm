@@ -87,8 +87,24 @@ export function precheck(env: { host: string; href: string; loggedIn: unknown; c
   return null
 }
 
+type Ytcfg = { get(key: string): any }
+
+export async function apiHeaders(cfg: Ytcfg, sapisid: string, ts: number): Promise<Record<string, string>> {
+  const headers: Record<string, string> = {
+    Authorization: await sapisidHash(sapisid, ts, ORIGIN),
+    'X-Goog-AuthUser': String(cfg.get('SESSION_INDEX') ?? 0),
+    'X-Goog-Visitor-Id': cfg.get('VISITOR_DATA') ?? '',
+    'X-Origin': ORIGIN,
+    'Content-Type': 'application/json',
+  }
+  // Brand-account channel: without this the playlist lands in the main channel.
+  const pageId = cfg.get('DELEGATED_SESSION_ID')
+  if (pageId) headers['X-Goog-PageId'] = String(pageId)
+  return headers
+}
+
 // Status box in the page corner. textContent/createElement only: YouTube enforces Trusted Types.
-function statusBox() {
+export function statusBox() {
   let box = document.getElementById('mix2ytm-box')
   if (!box) {
     box = document.createElement('div')
@@ -100,6 +116,8 @@ function statusBox() {
   }
   const el = box
   return (text: string, link?: string) => {
+    // Closed with ✕ mid-run: bring it back so the result link isn't lost.
+    if (!el.isConnected) document.body.append(el)
     const close = document.createElement('button')
     close.textContent = '✕'
     close.style.cssText = 'float:right;margin-left:12px;border:0;background:none;cursor:pointer;font-size:14px;color:#666'
@@ -139,13 +157,7 @@ export async function run(): Promise<void> {
       const res = await fetch(`/youtubei/v1/${ep}?prettyPrint=false`, {
         method: 'POST',
         credentials: 'include',
-        headers: {
-          Authorization: await sapisidHash(sapisid, Math.floor(Date.now() / 1000), ORIGIN),
-          'X-Goog-AuthUser': String(cfg.get('SESSION_INDEX') ?? 0),
-          'X-Goog-Visitor-Id': cfg.get('VISITOR_DATA') ?? '',
-          'X-Origin': ORIGIN,
-          'Content-Type': 'application/json',
-        },
+        headers: await apiHeaders(cfg, sapisid, Math.floor(Date.now() / 1000)),
         body: JSON.stringify({ context, ...body }),
       })
       if (!res.ok) throw new Error(`YouTube báo lỗi (HTTP ${res.status}). Tải lại trang rồi thử lại.`)

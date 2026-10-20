@@ -2,7 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
-import { mixIdsFromUrl, panelItems, cookieValue, sapisidHash, readMix, precheck } from './bookmarklet.ts'
+import { mixIdsFromUrl, panelItems, cookieValue, sapisidHash, readMix, precheck, apiHeaders, statusBox } from './bookmarklet.ts'
 import { buildHref } from './build.ts'
 
 const fixture = JSON.parse(readFileSync(new URL('./fixtures/next.json', import.meta.url), 'utf8'))
@@ -133,4 +133,53 @@ test('buildHref makes a javascript: link with plain JS and intact Vietnamese tex
   assert.ok(!/(^|\n)export /.test(code))
   assert.ok(code.includes('Đang đọc Mix'))
   new Function(code)
+})
+
+const cfgOf = (o: Record<string, unknown>) => ({ get: (k: string) => o[k] })
+
+test('apiHeaders targets the signed-in account being viewed', async () => {
+  const h = await apiHeaders(cfgOf({ SESSION_INDEX: 2, VISITOR_DATA: 'vis' }), 'abc', 1700000000)
+  assert.equal(h.Authorization, await sapisidHash('abc', 1700000000, 'https://www.youtube.com'))
+  assert.equal(h['X-Goog-AuthUser'], '2')
+  assert.equal(h['X-Goog-Visitor-Id'], 'vis')
+  assert.equal(h['X-Goog-PageId'], undefined)
+})
+
+test('apiHeaders sends X-Goog-PageId for a brand-account channel', async () => {
+  const h = await apiHeaders(cfgOf({ DELEGATED_SESSION_ID: '1234' }), 'abc', 1)
+  assert.equal(h['X-Goog-PageId'], '1234')
+  assert.equal(h['X-Goog-AuthUser'], '0')
+})
+
+// Minimal DOM: enough for statusBox (getElementById, createElement, body.append, remove, isConnected).
+function fakeDom() {
+  const attached = new Set<any>()
+  const make = (): any => {
+    const el: any = { style: {}, children: [] as any[], textContent: '' }
+    el.append = (...c: any[]) => { if (el === body) c.forEach((x) => attached.add(x)); else el.children.push(...c) }
+    el.replaceChildren = (...c: any[]) => { el.children = c }
+    el.remove = () => attached.delete(el)
+    Object.defineProperty(el, 'isConnected', { get: () => attached.has(el) })
+    return el
+  }
+  const body = make()
+  ;(globalThis as any).document = {
+    body,
+    createElement: make,
+    getElementById: (id: string) => [...attached].find((e) => e.id === id) ?? null,
+  }
+  return attached
+}
+
+test('statusBox comes back when the user closed it mid-run', () => {
+  const attached = fakeDom()
+  const show = statusBox()
+  show('Đang đọc Mix… 25 bài')
+  const box = [...attached][0]
+  box.children[0].onclick() // ✕
+  assert.equal(attached.size, 0)
+  show('✅ Đã tạo playlist 25 bài', 'https://music.youtube.com/playlist?list=PL1')
+  assert.ok(box.isConnected)
+  assert.equal(box.children.at(-1).href, 'https://music.youtube.com/playlist?list=PL1')
+  delete (globalThis as any).document
 })
