@@ -2,7 +2,8 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
-import { mixIdsFromUrl, panelItems, cookieValue, sapisidHash, readMix } from './bookmarklet.ts'
+import { mixIdsFromUrl, panelItems, cookieValue, sapisidHash, readMix, precheck } from './bookmarklet.ts'
+import { buildHref } from './build.ts'
 
 const fixture = JSON.parse(readFileSync(new URL('./fixtures/next.json', import.meta.url), 'utf8'))
 
@@ -98,4 +99,38 @@ test('readMix stops on a Mix that never ends (100 calls / 1,000 tracks cap)', as
   const mix = await readMix(callNext, { videoId: 'x' })
   assert.ok(calls <= 100)
   assert.ok(mix.tracks.length <= 1000 && mix.tracks.length >= 975)
+})
+
+const MIX = 'https://www.youtube.com/watch?v=0GVExpdmoDs&list=RD0GVExpdmoDs'
+const env = (o: Partial<{ host: string; href: string; loggedIn: unknown; cookie: string }>) => ({
+  host: 'www.youtube.com', href: MIX, loggedIn: true, cookie: 'SAPISID=x', ...o,
+})
+
+test('precheck: not on youtube.com (e.g. the install page)', () => {
+  assert.match(precheck(env({ host: 'example.github.io', href: 'https://example.github.io/', loggedIn: undefined, cookie: '' }))!, /^Hãy mở một Mix trên youtube.com/)
+})
+
+test('precheck: youtube page that is not a Mix', () => {
+  assert.match(precheck(env({ href: 'https://www.youtube.com/watch?v=x' }))!, /^Trang này không phải Mix/)
+})
+
+test('precheck: signed out', () => {
+  assert.match(precheck(env({ loggedIn: false }))!, /^Bạn chưa đăng nhập YouTube/)
+})
+
+test('precheck: signed in flag but no SAPISID cookie counts as signed out', () => {
+  assert.match(precheck(env({ cookie: 'a=1' }))!, /^Bạn chưa đăng nhập YouTube/)
+})
+
+test('precheck: all good', () => {
+  assert.equal(precheck(env({})), null)
+})
+
+test('buildHref makes a javascript: link with plain JS and intact Vietnamese text', () => {
+  const href = buildHref(readFileSync(new URL('./bookmarklet.ts', import.meta.url), 'utf8'))
+  assert.ok(href.startsWith('javascript:'))
+  const code = decodeURIComponent(href.slice('javascript:'.length))
+  assert.ok(!/(^|\n)export /.test(code))
+  assert.ok(code.includes('Đang đọc Mix'))
+  new Function(code)
 })

@@ -69,3 +69,102 @@ export async function readMix(
   }
   return { title, tracks: tracks.slice(0, MAX_TRACKS) }
 }
+
+const ORIGIN = 'https://www.youtube.com'
+const MSG = {
+  notYoutube: 'Hãy mở một Mix trên youtube.com rồi bấm lại. (Nếu bạn đang ở trang cài đặt: kéo nút lên thanh dấu trang, đừng bấm.)',
+  notMix: 'Trang này không phải Mix. Mở một video có danh sách "Mix" rồi bấm lại.',
+  signedOut: 'Bạn chưa đăng nhập YouTube. Đăng nhập rồi bấm lại.',
+  failed: 'Không tạo được playlist. Tải lại trang rồi thử lại.',
+}
+
+export function precheck(env: { host: string; href: string; loggedIn: unknown; cookie: string }): string | null {
+  if (env.host !== 'www.youtube.com') return MSG.notYoutube
+  if (!mixIdsFromUrl(env.href)) return MSG.notMix
+  if (env.loggedIn !== true || !(cookieValue(env.cookie, 'SAPISID') ?? cookieValue(env.cookie, '__Secure-3PAPISID'))) {
+    return MSG.signedOut
+  }
+  return null
+}
+
+// Status box in the page corner. textContent/createElement only: YouTube enforces Trusted Types.
+function statusBox() {
+  let box = document.getElementById('mix2ytm-box')
+  if (!box) {
+    box = document.createElement('div')
+    box.id = 'mix2ytm-box'
+    box.style.cssText =
+      'position:fixed;top:16px;right:16px;z-index:2147483647;background:#fff;color:#111;padding:12px 16px;' +
+      'border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.25);font:14px system-ui,sans-serif;max-width:320px'
+    document.body.append(box)
+  }
+  const el = box
+  return (text: string, link?: string) => {
+    const close = document.createElement('button')
+    close.textContent = '✕'
+    close.style.cssText = 'float:right;margin-left:12px;border:0;background:none;cursor:pointer;font-size:14px;color:#666'
+    close.onclick = () => el.remove()
+    const msg = document.createElement('div')
+    msg.textContent = text
+    el.replaceChildren(close, msg)
+    if (link) {
+      const a = document.createElement('a')
+      a.href = link
+      a.target = '_blank'
+      a.textContent = 'Mở trong YouTube Music'
+      a.style.cssText = 'display:inline-block;margin-top:8px;color:#c00;font-weight:600'
+      el.append(a)
+    }
+  }
+}
+
+export async function run(): Promise<void> {
+  const w = window as any
+  if (w.__mix2ytmRunning) return
+  const show = statusBox()
+  const cfg = w.ytcfg
+  const error = precheck({
+    host: location.host,
+    href: location.href,
+    loggedIn: cfg?.get?.('LOGGED_IN'),
+    cookie: document.cookie,
+  })
+  if (error) return show(error)
+  w.__mix2ytmRunning = true
+  try {
+    const { videoId, playlistId } = mixIdsFromUrl(location.href)!
+    const context = cfg.get('INNERTUBE_CONTEXT')
+    const sapisid = (cookieValue(document.cookie, 'SAPISID') ?? cookieValue(document.cookie, '__Secure-3PAPISID'))!
+    const post = async (ep: string, body: object) => {
+      const res = await fetch(`/youtubei/v1/${ep}?prettyPrint=false`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          Authorization: await sapisidHash(sapisid, Math.floor(Date.now() / 1000), ORIGIN),
+          'X-Goog-AuthUser': String(cfg.get('SESSION_INDEX') ?? 0),
+          'X-Goog-Visitor-Id': cfg.get('VISITOR_DATA') ?? '',
+          'X-Origin': ORIGIN,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ context, ...body }),
+      })
+      if (!res.ok) throw new Error(`YouTube báo lỗi (HTTP ${res.status}). Tải lại trang rồi thử lại.`)
+      return res.json()
+    }
+    show('Đang đọc Mix…')
+    const mix = await readMix((b) => post('next', { playlistId, ...b }), { videoId }, (n) => show(`Đang đọc Mix… ${n} bài`))
+    if (!mix.tracks.length) return show(MSG.failed)
+    show(`Đang tạo playlist ${mix.tracks.length} bài…`)
+    const created = await post('playlist/create', {
+      title: mix.title || 'YouTube Mix',
+      privacyStatus: 'PRIVATE',
+      videoIds: mix.tracks.map((t) => t.id),
+    })
+    if (!created?.playlistId) return show(MSG.failed)
+    show(`✅ Đã tạo playlist ${mix.tracks.length} bài`, `https://music.youtube.com/playlist?list=${created.playlistId}`)
+  } catch (err) {
+    show((err as Error).message.startsWith('YouTube báo lỗi') ? (err as Error).message : MSG.failed)
+  } finally {
+    w.__mix2ytmRunning = false
+  }
+}
